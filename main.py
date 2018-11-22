@@ -140,8 +140,8 @@ def MatrizIteracion(z_k):
     mI = np.empty(3)
 
     mI[0] = F(z_k[0], z_k[1], z_k[2])
-    mI[1] = F(z_k[0], z_k[1], z_k[2])
-    mI[2] = F(z_k[0], z_k[1], z_k[2])
+    mI[1] = G(z_k[0], z_k[1], z_k[2])
+    mI[2] = H(z_k[0], z_k[1], z_k[2])
 
     return mI
     
