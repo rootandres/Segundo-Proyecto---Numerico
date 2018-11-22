@@ -8,6 +8,29 @@ I = np.array([0.5, 1, 2, 4, 8, 12])
 #Definir los puntos del vecto V
 V = np.array([160, 120, 94, 75, 62, 56])
 
+def F (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        A = V[i] - (a*(I[i]**b)) + c
+        B = I[i]**b
+        sum += (A*B)
+    return sum
+
+def G (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        A = V[i] - (a*(I[i]**b)) + c
+        B = I[i]**(b-1)
+        sum += (A*B)
+    return sum
+
+def H (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        A = V[i] - (a*(I[i]**b)) + c
+        sum += A
+    return sum
+
 def F_a (a,b,c):
     sum = 0
     aux = 0
@@ -97,16 +120,25 @@ def H_c (a,b,c):
         sum += 1
     return -sum
 
+
+# Matriz Jacobiano 
+def Jacobiano (mF, mG, mH):
+    mJ = np.empty(3,3)
+    # Rellenando la matriz
+    for i in range (0,3):
+        mJ[0][i] = mF[i]
+
+    for i in range (0,3):
+        mJ[1][i] = mG[i]
+    
+    for i in range (0,3):
+        mJ[2][i] = mH[i]
+    
+    return mJ
+
+    
 z = np.array([1,1,1])  # Z[0]
 
-print (F_a(z[0],z[1],z[2]))
-print (F_b(z[0],z[1],z[2]))
-print (F_c(z[0],z[1],z[2]))
-
-print (G_a(z[0],z[1],z[2]))
-print (G_b(z[0],z[1],z[2]))
-print (G_c(z[0],z[1],z[2]))
-
-print (H_a(z[0],z[1],z[2]))
-print (H_b(z[0],z[1],z[2]))
-print (H_c(z[0],z[1],z[2]))
+n1 = F_a(z[0],z[1],z[2])
+n2 = F_a(z[0],z[1],z[2])
+n3 = F_a(z[0],z[1],z[2])
