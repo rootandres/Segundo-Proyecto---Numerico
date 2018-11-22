@@ -17,6 +17,34 @@ def F_a (a,b,c):
     
     return -sum
 
+def F_b (a,b,c):
+    sum = 0
+
+    for i in range (0,N):
+        
+        A = V[i] - (a * I[i]) - c
+        A = A * b
+        A = A * (I[i] ** (b-1))
+
+        B = a * b
+        B = B * (I[i] ** b)
+        B = B * (I[i] ** (b-1))
+        
+        sum += A-B
+
+    return sum
+
+def F_c (a,b,c):
+    sum = 0
+
+    for i in range (0,N):
+        sum += (I[i]**b)
+
+    return -sum
+
 z = np.array([1,1,1])  # Z[0]
 
 print (F_a(z[0],z[1],z[2]))
+print (F_b(z[0],z[1],z[2]))
+print (F_c(z[0],z[1],z[2]))
+
