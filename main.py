@@ -77,6 +77,26 @@ def G_c (a,b,c):
 
     return -sum
 
+def H_a (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        sum += (I[i]**b)
+    return -sum
+
+def H_b (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        A = I[i]**(b-1)
+        A = A*a*b
+        sum += A
+    return -sum
+
+def H_c (a,b,c):
+    sum = 0
+    for i in range (0,N):
+        sum += 1
+    return -sum
+
 z = np.array([1,1,1])  # Z[0]
 
 print (F_a(z[0],z[1],z[2]))
@@ -86,3 +106,7 @@ print (F_c(z[0],z[1],z[2]))
 print (G_a(z[0],z[1],z[2]))
 print (G_b(z[0],z[1],z[2]))
 print (G_c(z[0],z[1],z[2]))
+
+print (H_a(z[0],z[1],z[2]))
+print (H_b(z[0],z[1],z[2]))
+print (H_c(z[0],z[1],z[2]))
