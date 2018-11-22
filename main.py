@@ -122,8 +122,8 @@ def H_c (a,b,c):
 
 
 # Matriz Jacobiano 
-def Jacobiano (mF, mG, mH):
-    mJ = np.empty(3,3)
+def Jacobiano_inv (mF, mG, mH):
+    mJ = np.zeros((3,3))
     # Rellenando la matriz
     for i in range (0,3):
         mJ[0][i] = mF[i]
@@ -134,7 +134,7 @@ def Jacobiano (mF, mG, mH):
     for i in range (0,3):
         mJ[2][i] = mH[i]
     
-    return mJ
+    return np.linalg.inv(mJ)
 
 def MatrizIteracion(z_k):
     mI = np.empty(3)
@@ -145,8 +145,32 @@ def MatrizIteracion(z_k):
 
     return mI
     
-z = np.array([1,1,1])  # Z[0]
+    
+z = np.array([1,2,3])  # Z[0]
+mF = np.zeros(3)
 
-n1 = F_a(z[0],z[1],z[2])
-n2 = F_a(z[0],z[1],z[2])
-n3 = F_a(z[0],z[1],z[2])
+mF[0] = F_a(z[0],z[1],z[2])
+mF[1] = F_b(z[0],z[1],z[2])
+mF[2] = F_c(z[0],z[1],z[2])
+
+mG = np.zeros(3)
+
+mG[0] = G_a(z[0],z[1],z[2])
+mG[1] = G_b(z[0],z[1],z[2])
+mG[2] = G_c(z[0],z[1],z[2])
+
+mH = np.zeros(3)
+
+mH[0] = H_a(z[0],z[1],z[2])
+mH[1] = H_b(z[0],z[1],z[2])
+mH[2] = H_c(z[0],z[1],z[2])
+
+mJinv = np.empty((3,3))
+mJinv = Jacobiano_inv(mF,mG,mH)
+
+mIter = MatrizIteracion(z)
+
+z_k = z - np.dot(mJinv,mIter)
+
+print (z_k)
+
